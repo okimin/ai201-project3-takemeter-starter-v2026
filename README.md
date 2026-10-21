@@ -44,7 +44,7 @@ torch:  2.14.1
 
 <!-- Your community, and what your classifier sorts posts into. Three or four
      sentences. -->
-
+The community was Reddit with a story on a woman's boyfriend treatment against her insecurity. The classifer were split into support, anedote and pushback. Some were harder to classify compared to others.
 
 
 ---
