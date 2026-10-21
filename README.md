@@ -1,4 +1,7 @@
 # TakeMeter
+## FOR LATER
+device: mps  (Apple Silicon GPU (MPS))
+torch:  2.14.1
 
 > ### 👋 Start here
 >
@@ -54,33 +57,52 @@
      The decision rule is worth a point on its own and it's the thing most
      people leave out. Every taxonomy has a hardest boundary. Name yours. -->
 
-### `label_one`
+### `support`
 
-**Definition:**
-
-**Example 1:**
->
-
-**Example 2:**
->
-
-### `label_two`
-
-**Definition:**
+**Definition:** A comment whose main point is backing OP or someone else in
+the thread (praise, comfort, congratulations, or telling them they deserve
+better), with any mention of the commenter's own life kept to a passing clause.
 
 **Example 1:**
->
+> Literal life goals. What a man! Keep him. Gosh it's nice to not say "throw the whole man away." He's a gem.
 
 **Example 2:**
->
+> Girrrrl you don’t deserve that. Why isn’t he an ex??? You don’t proudly publicly humiliate some one you love.
+
+### `anecdote`
+
+**Definition:** A comment whose main point is a story or experience from the
+commenter's own life (their partner, their skin, a past relationship), even if
+it opens or closes with a line of encouragement for OP.
+
+**Example 1:**
+> This right here, OP. I met a guy once who did the same thing for me. We’ll be married 9 years next month. He still does it every single day.
+
+**Example 2:**
+> Meanwhile my boyfriend told me I should “fix my face” when I had a flare up of rosacea
+
+### `pushback`
+
+**Definition:** A comment that disagrees with OP or another commenter, or
+questions the post itself, whatever its tone.
+
+**Example 1:**
+> I mean, isn’t this is kinda bare minimum, telling your partner you’re attracted to them and think they’re beautiful as they are? Yes it’s very sweet, but it doesn’t mean they’re THE ONE.I wish op all the luck in love and hope their partner is the one for them! Just musing.
+
+**Example 2:**
+> AI almost always uses – or —, and few people do. Now there’s an over-association
 
 ### The hardest boundary
 
-**Which two labels:**
+**Which two labels:** `support` and `anecdote`
 
 **The decision rule I used every time:**
-<!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
-     if the tone is heated." -->
+If the commenter's own story takes up more of the comment than the words aimed
+at OP, it's `anecdote`; otherwise it's `support`. A one-clause mention ("I have
+one too!", "reminds me of my bf") never makes a comment `anecdote`. Skincare
+advice follows the same rule: if it rests on what worked for the commenter or
+someone they know, it's `anecdote`. Harsh words about OP's boyfriend are
+`support`, not `pushback`, because they side with OP.
 
 
 
@@ -92,18 +114,19 @@
      cases. -->
 
 **Where the posts came from:**
-
+https://www.reddit.com/r/GirlDinnerDiaries/comments/1wr9s18/my_boyfriend_tells_me_every_day_and_i_never/
 **How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
 Say so plainly — the disclosure is required, not penalised. -->
+They were prelabelled due to time constaints, but were checked, especially on the pushback side.
 
 **Counts per label:**
 
 | Label | Count | Share |
 |---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-| **Total** |  | 100% |
+| support | 67 | 65  |
+| anecdote | 25 | 24 |
+| pushback | 11 | 11 |
+| **Total** | 103 | 100% |
 
 **Three hard cases**
 
@@ -112,24 +135,25 @@ Say so plainly — the disclosure is required, not penalised. -->
 
 **1.**
 > *The post:*
->
-> *Could have been:*
->
-> *I chose, because:*
+>"Hey OP, boy lurker here but your post struck a chord. For 12 years I've been on a daily mission to tell my girlfriend how beautiful she is and to tackle her insecurities. Trust your boyfriend, he's right and you're beautiful"
+> *Could have been:* Support
+> 
+> *I chose, because:* His story took up most of the content of the comment
 
 **2.**
 > *The post:*
+> That is super sweet, but from a dermatology standpoint you don't have to suffer… Please see a dermatologist… I have had ocular rosacea my whole life. It has improved so much with treatment.
+> *Could have been:* support
 >
-> *Could have been:*
->
-> *I chose, because:*
+> *I chose, because:* Gave her own experience with Rosnea
 
 **3.**
 > *The post:*
->
+> Some of us are in the TRENCHES and the bar is in hell
 > *Could have been:*
->
-> *I chose, because:*
+> support
+> *I chose, because:* was arguing about the quality people have been going through not having  similar treatment like the orginal person
+
 
 ---
 
@@ -162,8 +186,8 @@ of next unit's variance. -->
 
 **Moment 1**
 
-- *What I asked for:*
-- *What came back:*
+- *What I asked for:* Come up with 3 labels to help suggest 
+- *What came back:*Good categorization on the labels as well as what posts go under it.
 - *What I changed:*
 
 **Moment 2**
