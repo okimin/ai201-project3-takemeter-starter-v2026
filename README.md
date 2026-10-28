@@ -123,10 +123,10 @@ They were prelabelled due to time constaints, but were checked, especially on th
 
 | Label | Count | Share |
 |---|---|---|
-| support | 67 | 65  |
-| anecdote | 25 | 24 |
-| pushback | 11 | 11 |
-| **Total** | 103 | 100% |
+| support | 97 | 65% |
+| anecdote | 35 | 23% |
+| pushback | 18 | 12% |
+| **Total** | 150 | 100% |
 
 **Three hard cases**
 
@@ -250,11 +250,14 @@ Accuracy moved 0.087 across seeds. Enough that a criterion landing within that b
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Macro F1 | ≥ 0.45 | 0.263 | 0.263 | 0.468 | MISSED |
+| 2. `anecdote` F1 | ≥ 0.40 | 0.000 | 0.000 | 0.571 | MISSED |
+| 3. `pushback` recall | ≥ 0.50 | 0.00 (0/3) | 0.00 (0/3) | 0.00 (0/3) | MISSED |
+| 4. Agreement with staff labels | ≥ 75% | 80% | 80% | 80% | MET |
+| 5. Confidence gap (top third − bottom third accuracy) | ≥ 0.40 | 0.714 | 0.857 | 0.714 | MET |
+
+Criterion 4 is a single check of my labels against the staff set, so it doesn't
+change with the seed. The same 80% applies to all three columns.
 
 ### Confusion matrix
 
@@ -291,11 +294,17 @@ model. Your agreement report is the thing that can tell you which.
 
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Macro F1 | ≥ 0.45 on every seed | MISSED | 0.263 / 0.263 / 0.468. Only seed 2024 cleared it, and only by 0.018. It has to hold on all three. |
+| 2 | `anecdote` F1 | ≥ 0.40 on every seed | MISSED | 0.000 / 0.000 / 0.571. Seeds 42 and 7 never predicted `anecdote` at all. |
+| 3 | `pushback` recall | ≥ 0.50 on every seed | MISSED | 0 of 3 on every seed. The model never predicted `pushback` once. |
+| 4 | Agreement with staff | ≥ 75% | MET | 24 / 30 = 80% in `agreement_results.json`. This is one check of my labels, not a per-seed number. |
+| 5 | Confidence gap | ≥ 0.40 on every seed | MET | 1.000 − 0.286 = 0.714, 1.000 − 0.143 = 0.857, 1.000 − 0.286 = 0.714. It holds on all three. One caveat: on seeds 42 and 7 the model predicts `support` for everything. The "confident third" is just the most support-sounding posts, and those are support posts. So the model passed, but this criterion can't tell a useful confidence signal apart from a collapsed model. |
+
+> Note on criterion 3: my criteria were written when I expected 16 test posts
+> with 2 `pushback`. The final dataset is 150 posts, so the test split is 23
+> with 3 `pushback`, and 0.50 recall now means 2 of 3. The criterion is still
+> measurable, so I haven't revised it, and at 0 of 3 the verdict is the same
+> either way.
 
 **Diagnoses**
 
@@ -307,6 +316,77 @@ model. Your agreement report is the thing that can tell you which.
      ⚠️ Use your agreement report as evidence. It is the only instrument you
      have that can tell a LABELLING problem from a MODEL problem, and this
      section is graded on whether you used it that way. -->
+
+**Miss 1: Macro F1 (cause: too few examples for the minority labels)**
+
+Macro F1 is the average of the three per-label F1s, and `support` was never the
+problem: it scored 0.789 / 0.789 / 0.833. This miss is entirely caused by
+misses 2 and 3. On seeds 42 and 7, `anecdote` and `pushback` both score 0, so
+macro F1 is 0.789 ÷ 3 = 0.263. That is exactly the "always say support" floor I
+predicted in criteria.md when I set this target. Seeds 42 and 7 produced
+identical results: all 23 test posts were predicted `support` (confusion
+matrix: column `support` = 5 / 3 / 15, every other column 0). The model never
+learned to leave the majority class. Seed 2024 only cleared 0.45 because it
+picked up 2 of the 5 anecdotes.
+
+**Miss 2: `anecdote` F1 (cause: too few examples, with my labelling as a secondary suspect)**
+
+`anecdote` F1 is 0.000 / 0.000 / 0.571. I think this is mainly a data problem,
+not a labelling problem, for three reasons:
+
+1. **The model isn't confusing the boundary, it's ignoring the label.** If I
+   had labelled support vs. anecdote inconsistently, I'd expect wrong
+   predictions in *both* directions: some anecdotes called support and some
+   support posts called anecdote. Instead, two seeds predict `anecdote` zero
+   times. When seed 2024 does use it, it is right every time (precision 1.0, 2
+   of 2), and no `support` post was ever called `anecdote`.
+2. **The label isn't unreachable from text.** The zero-shot baseline, which
+   never saw my training data, got `anecdote` recall of 0.60. So the signal is
+   in the posts. My fine-tuned model just never got pushed off the majority
+   class: about 24 `anecdote` training examples against about 68 `support`,
+   trained for 3 epochs × 7 batches = 21 updates in total.
+3. **My agreement report says my labelling is mostly consistent.** At 80%
+   against staff, I passed my own 75% bar.
+
+But the agreement report is also why I can't fully clear my labelling. All six
+of my disagreements went to staff, all were pile (a), and five of them were the
+same mistake: I let a post's *tone* override what the rule says about its
+*structure*. My support/anecdote rule is a structural one too ("whose part is
+longer?"), and many anecdotes open warmly before the story. A test example is
+"He sounds like a keeper! I went on a makeup course as part of my cancer
+treatment…". If I made the tone-over-structure mistake on 5 of 30 staff posts
+with the rules in front of me, some warm-opening anecdotes in my AI-pre-labelled
+training data have probably ended up as `support`. That would push the model in
+exactly the direction the matrix shows (5 of 5 anecdotes → `support` on two
+seeds). So the main cause is too few examples, and the second suspect is
+inconsistent labelling on the support/anecdote boundary. A relabelling pass on
+that boundary would test the second.
+
+**Miss 3: `pushback` recall (cause: too few examples for a label that is really three different things)**
+
+The model got 0 of 3 on every seed and never predicted `pushback` once. There
+are only about 12–13 `pushback` examples in training (18 total, 70% split).
+Those 18 aren't one pattern. They split into three groups:
+
+- **Accusing OP of using AI:** "Thanks chatgpt", "Beige flag cause it was written with ai"
+- **Disagreeing with OP's framing:** "isn't this kinda bare minimum…", "Eh, I'd be wary of the 'I haven't missed a day…' thing"
+- **Defending OP against the AI accusers:** "So tired of all the AI accusations…", "Same! It's like if someone writes well, it must be AI…"
+
+The third group is `pushback` under my rule ("disagrees with OP *or another
+commenter*, whatever its tone"). But its words side with OP, so on tone alone
+it reads as `support`. That is the same tone-vs-structure gap my agreement
+report caught me falling into. Here, though, the agreement report points to
+the model rather than my labels. I applied "whatever its tone" consistently:
+every AI-defence comment is `pushback`. The issue is that a model with about 12
+mixed examples learns tone, not who a comment is arguing with. Two of the three
+test `pushback` posts are the hard kind: "Same! It's like if someone writes
+well…" (an AI defence that sounds supportive) and "Eh, I'd be wary…" (which
+starts gently). The zero-shot baseline caught 2 of the 3 (recall 0.67), so the
+label can be reached from the text. My fine-tuned model just had too few
+examples, split across three sub-patterns, to learn it. So this is too few
+examples combined with a genuinely hard pair (`pushback` vs. `support`), and
+the difficulty comes from how I defined the label, not from applying it
+inconsistently.
 
 
 
@@ -434,24 +514,79 @@ only a model problem.
 
 ## The Improvement
 
-**What I changed:**
+**What I changed:** One training setting: `EPOCHS` went from 3 to 10 in section
+2 of the notebook. Everything else is unchanged: same 150 labels, same learning
+rate (2e-5), batch size (16), seeds (42, 7, 2024) and splits. The re-run was
+saved with `RUN_LABEL = "after"` to `results_three_seeds_after.json`.
 
-**Which diagnosis pointed at it:**
+**Which diagnosis pointed at it:** Misses 1 and 2. On seeds 42 and 7 the
+model predicted `support` for all 23 test posts. Those two seeds gave identical
+results, which looks like a model that never trained long enough to leave the
+majority class, not one confused by a boundary. Three epochs of about 104 posts
+at batch size 16 is only 21 updates. The zero-shot baseline showed that
+`anecdote` and `pushback` can be found from the text, so I tested whether the
+model just needed more training before blaming the labels. I picked this over
+adding 30 `pushback` posts because that would mean collecting new comments,
+and over relabelling because my agreement report made labelling the
+*secondary* suspect.
 
 ### Run Log — After
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Macro F1 | ≥ 0.45 | 0.483 | 0.746 | 0.503 | MET (was MISSED) |
+| 2. `anecdote` F1 | ≥ 0.40 | 0.600 | 0.800 | 0.600 | MET (was MISSED) |
+| 3. `pushback` recall | ≥ 0.50 | 0.00 (0/3) | 0.33 (1/3) | 0.00 (0/3) | MISSED |
+| 4. Agreement with staff labels | ≥ 75% | 80% | 80% | 80% | MET (unchanged; not affected by training) |
+| 5. Confidence gap (top third − bottom third accuracy) | ≥ 0.40 | 0.571 | 0.286 | 0.429 | MISSED (was MET) |
+
+| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
+|---|---|---|---|---|
+| Overall accuracy | 0.739 | 0.870 | 0.783 | 0.130 |
+| Macro F1 | 0.483 | 0.746 | 0.503 | 0.263 |
+| F1 — `anecdote` | 0.600 | 0.800 | 0.600 | 0.200 |
+| F1 — `pushback` | 0.000 | 0.500 | 0.000 | 0.500 |
+| F1 — `support` | 0.848 | 0.938 | 0.909 | 0.089 |
+
+Confusion matrix, seed 42 (after):
+
+| true \ predicted | anecdote | pushback | support |
+|---|---|---|---|
+| **anecdote** | 3 | 0 | 2 |
+| **pushback** | 1 | 0 | 2 |
+| **support** | 1 | 0 | 14 |
 
 **Did it help, and how do I know:**
 
-<!-- If it didn't, say so. Relabelling that didn't help is a genuinely
-     interesting result and earns full credit. -->
+Yes for `anecdote` and macro F1. No for `pushback`. It also broke criterion 5.
+
+- **The collapse is gone.** Before, seeds 42 and 7 put all 23 posts in the
+  `support` column. After, every seed predicts `anecdote` and catches 3–4 of
+  the 5. Seed 42's matrix went from 0 / 0 / 5 to 3 / 0 / 2 on the `anecdote`
+  row, and the model now makes mistakes in both directions (1 `support` called
+  `anecdote`). Accuracy rose on every seed (0.652 → 0.739, 0.652 → 0.870,
+  0.739 → 0.783). Changing only the epoch count fixed the anecdote problem, so
+  the main cause of miss 2 was training length, not my labels.
+- **`pushback` barely moved.** Only seed 7 caught one. The other `pushback`
+  posts are now split between `support` and `anecdote` instead of all going to
+  `support`. More training didn't fix it, which fits my diagnosis for miss 3:
+  about 12 training examples, split across three different kinds of comment,
+  isn't enough. Training longer can't create examples that aren't there.
+- **Criterion 5 now misses, and seed 7 shows why.** Seed 7 is the best model
+  (0.870 accuracy), but even its *least* confident third is 71% right, so the
+  gap is only 0.286. The before-model passed this criterion by being useless
+  (always `support`), and the better model fails it because it's right even
+  when unsure. A gap measure punishes a model that is good everywhere. I'm
+  leaving the criterion and its verdict as they are, because it can still be
+  measured. But it's a sign that the gap number alone doesn't measure "useful
+  confidence".
+- **Caveat on stability.** Accuracy now spreads 0.130 across seeds (up from
+  0.087), and the notebook flags anything over 0.10 as too unstable to trust.
+  Seed 7 got lucky on its split. Criteria 1 and 2 are MET on all three seeds,
+  but seeds 42 and 2024 clear macro F1 by only 0.03–0.05. Also, I chose 10
+  epochs before looking at any results and didn't tune it. The validation loss
+  on seed 2024 was lowest around epoch 5, so some of the extra epochs may be
+  overfitting.
 
 
 
