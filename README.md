@@ -601,7 +601,8 @@ Yes for `anecdote` and macro F1. No for `pushback`. It also broke criterion 5.
 **The gap between what I meant my labels to capture and what the model
 learned:**
 <!-- Two sentences. Your confusion matrix is the evidence. -->
-
+Pushback not fixed: this fits your diagnosis. About 12 training examples split across three kinds of comment is too few, and training longer can't add examples.
+Confidence criterion fails because the model got better. Seed 7 scored 0.870 accuracy, and even its least-confident third is 71% right, so the gap shrank. The criterion can still be measured, so I left it and its verdict as they are and explained this in the README.
 
 
 <!-- ═════════════════════════════════════════════════════════════════════
