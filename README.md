@@ -320,7 +320,7 @@ model. Your agreement report is the thing that can tell you which.
      data/staff_taxonomy.md, not your own — so every argument below is made
      from those definitions and those decision rules. -->
 
-**Agreement rate:** ___ / 30 = ___%
+**Agreement rate:** 24 / 30 = 80%
 
 <!-- Nobody grades this number. A 60% who argues every disagreement from the
      stated rules beats a 95% who wrote "staff was right" nine times. Several
@@ -342,25 +342,91 @@ model. Your agreement report is the thing that can tell you which.
      written rule two different ways on 30 posts, that is direct evidence about
      what you did across your own 200. -->
 
-**1.**
-> *The post:*
+**1.** (sp_003)
+> *The post:* "The club championship scoring changed in 2019 from top-6 to top-10. Since then our B team has finished above the A team twice. That's not depth improving, it's the scoring rewarding turnout."
 >
-> *Staff said / I said:*
+> *Staff said / I said:* `analysis` / `hot_take`
 >
-> *My call, and why:*
+> *My call, and why:* Staff is right. The post gives a named date (2019), a named rule change (top-6 to top-10) and a named result (B team above A team twice). The conclusion only works because of the rule change, so under rule 1 the fact is load-bearing. I let the confident "That's not X, it's Y" ending make it sound like a hot take. Rule 2 says strength of feeling isn't support, and the reverse holds too: a confident tone doesn't cancel the support that's there.
 >
-> *Which pile:*
+> *Which pile:* (a), a consistency problem
 
-**2.**
-> *The post:*
+**2.** (sp_004)
+> *The post:* "Everyone blames the hill at 18 miles. I split the field into people who ran the first half under 1:45 and over, and the slowdown after 18 was almost identical for both groups. If the hill were the problem the fast starters would fall apart harder."
 >
-> *Staff said / I said:*
+> *Staff said / I said:* `analysis` / `hot_take`
 >
-> *My call, and why:*
+> *My call, and why:* Staff is right. The writer sets up a test (splitting the field at 1:45), reports what it showed (almost identical slowdown) and draws the inference from it. That is the kind of argument the `analysis` definition describes. I think the "Everyone blames..." opening read to me as a contrarian claim, and I labelled the framing instead of the argument.
 >
-> *Which pile:*
+> *Which pile:* (a), a consistency problem
+
+**3.** (sp_005)
+> *The post:* "Carbon plates aren't the whole story. My times dropped 2% in the shoes and another 2% the following year in the same pair, when the only thing that changed was going from 35 to 50 miles a week."
+>
+> *Staff said / I said:* `analysis` / `hot_take`
+>
+> *My call, and why:* Staff is right, though this one is genuinely borderline (staff flagged it HARD). The first sentence is an unsupported hot take on its own. But the second sentence carries the post: two comparable 2% drops, with mileage as the only variable that changed. Rule 1 asks whether the fact carries the argument, not whether the sample is big enough, and here it does. Rule 4 points the same way, because the post spends most of its words on the numbers.
+>
+> *Which pile:* (a). The case for my label only covers the first sentence, so it isn't defensible as (c).
+
+**4.** (sp_006)
+> *The post:* "Checked the entry lists. 41% of this year's field have never run the distance before, against 26% five years ago. That's why the finish-line photos look different, not because standards dropped."
+>
+> *Staff said / I said:* `analysis` / `hot_take`
+>
+> *My call, and why:* Staff is right, and this is the clearest miss of the six. The post has two checkable percentages, and they're used to reject a rival explanation ("not because standards dropped"). This is almost exactly the rule 1 `analysis` example. The "That's why..." ending is confident, but that confidence comes from the numbers.
+>
+> *Which pile:* (a), a consistency problem
+
+**5.** (sp_010)
+> *The post:* "Three of us ran the same session on the same day, different shoes, within 10 seconds of each other over 5 miles. I'm not saying shoes do nothing, but whatever they do was smaller than the noise between three people."
+>
+> *Staff said / I said:* `analysis` / `hot_take`
+>
+> *My call, and why:* Staff is right. I marked it down because three runners on one day is weak evidence. But the `analysis` definition asks for a fact that is specific, checkable and doing work, not for strong evidence. "Within 10 seconds over 5 miles" is checkable, and the claim (shoe effect < noise) rests entirely on it. The writer even hedges, which a hot take doesn't do. I was grading how good the evidence was when the rule only asks whether it's there and load-bearing.
+>
+> *Which pile:* (a), a consistency problem
+
+**6.** (sp_029)
+> *The post:* "Just realised the shoes I set every PB in this year are the ones I bought by accident in the wrong size."
+>
+> *Staff said / I said:* `reaction` / `analysis`
+>
+> *My call, and why:* Staff is right. It contains a checkable fact (the shoes are the wrong size), but `analysis` has to *make an argument*, and this post doesn't argue anything. It reports the writer's own realisation from just now ("Just realised"), which is the `reaction` definition. Under rule 3, a fact only promotes a post to `analysis` when it is load-bearing in an argument, and here there is no argument for it to carry. I think I over-corrected on this one after realising late that I'd been too stingy with `analysis`.
+>
+> *Which pile:* (a), a consistency problem
 
 **What the pattern in my disagreements tells me:**
+
+All six disagreements are on staff's side, and five of the six go the same way:
+real `analysis` labelled `hot_take`. Overall I gave out 6 `analysis` labels
+against staff's 10 and 15 `hot_take` against their 10. I had no disagreements
+on the `reaction` vs `hot_take` boundary. So my problem isn't that the
+definitions are unclear. I applied rule 1 more strictly than it is written in
+two specific ways:
+
+1. **I let tone override content.** Every one of the five misses has a
+   confident or contrarian frame ("That's not X, it's Y", "Everyone blames…",
+   "aren't the whole story"). I labelled the frame and ignored the fact
+   underneath it.
+2. **I graded the quality of the evidence instead of whether it was present
+   and load-bearing.** Small samples (n=1, n=3) and the writer's own data got
+   marked down, even though the definition counts "a stat, a date, a time" as
+   support.
+
+None of these are gaps in the definitions (pile b), and none of my labels hold
+up as a defensible alternative reading (pile c). They are all pile (a). That
+matters for my own 200 labels, because it's direct evidence that I let the
+surface feel of a post decide when a written rule asks about its structure. My
+own hardest rule is the same kind of proportional judgement ("does the
+commenter's story take up more of the comment than the words aimed at OP?"),
+and my own posts were AI-pre-labelled and then checked. If I made this
+tone-over-structure mistake on 30 posts with the rules in front of me, I
+probably made it on some of the `anecdote`/`support` boundary too: a warm,
+supportive opener could have pulled a mostly-story comment into `support`. That
+would fit the confusion matrix, where all 5 real `anecdote` posts were predicted
+`support`. Part of that collapse may be a labelling consistency problem, not
+only a model problem.
 
 
 
