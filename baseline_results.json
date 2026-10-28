@@ -1,0 +1,149 @@
+{
+  "model": "facebook/bart-large-mnli",
+  "n": 23,
+  "seed": 42,
+  "held_out": true,
+  "used_definitions": true,
+  "scores": {
+    "n": 23,
+    "accuracy": 0.21739130434782608,
+    "f1_macro": 0.21666666666666667,
+    "per_label": {
+      "anecdote": {
+        "precision": 0.3,
+        "recall": 0.6,
+        "f1": 0.4,
+        "support": 5
+      },
+      "pushback": {
+        "precision": 0.15384615384615385,
+        "recall": 0.6666666666666666,
+        "f1": 0.25,
+        "support": 3
+      },
+      "support": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 15
+      }
+    }
+  },
+  "predictions": [
+    {
+      "text": "so many sweet comments at the bottom of this thread (including yours) have been downvoted presumably by just one person over and over again. what a hateful life that must be",
+      "gold": "support",
+      "predicted": "anecdote"
+    },
+    {
+      "text": "you are so lucky \ud83e\udd7a",
+      "gold": "support",
+      "predicted": "pushback"
+    },
+    {
+      "text": "This is the best reddit post I have seen in a long time. Congrats babe. You have a good one",
+      "gold": "support",
+      "predicted": "pushback"
+    },
+    {
+      "text": "In case they thought you were joking, I'm here to back you up.Ailments literally get better once you're no longer exposing yourself to toxin. Stress is toxic. That man is purposefully causing you stress. That man is toxic.",
+      "gold": "support",
+      "predicted": "pushback"
+    },
+    {
+      "text": "Thanks chatgpt",
+      "gold": "pushback",
+      "predicted": "pushback"
+    },
+    {
+      "text": "You can\u2019t do this to me.. I\u2019m on my period bawling my eyes out reading Reddit post lol",
+      "gold": "support",
+      "predicted": "pushback"
+    },
+    {
+      "text": "That's what I do to my boyfriend too ^ he is very attractive but for a long period of his life self esteem was quite low, so every day starts with \"good morning beautiful/handsome \" my message to him \ud83d\ude0a",
+      "gold": "anecdote",
+      "predicted": "anecdote"
+    },
+    {
+      "text": "Men like your boyfriend do exist, and I am so glad you found one! My bf now husband helped me fight my insecurities while dating by asking me for a positive \u201cI am\u2026\u201d statement every day. I could not repeat my responses. On days I was loosing my battle, he\u2019d share the list of my \u201cI am\u201d statements he had compiled.",
+      "gold": "anecdote",
+      "predicted": "pushback"
+    },
+    {
+      "text": "I\u2019m so glad you found an awesome Boyfriend OP! Here\u2019s to a long lasting relationship \ud83e\udd42",
+      "gold": "support",
+      "predicted": "anecdote"
+    },
+    {
+      "text": "please never ever leave that man.",
+      "gold": "support",
+      "predicted": "pushback"
+    },
+    {
+      "text": "I\u2019m a sobbing mess now \u2026 this is so incredibly sweet \ud83e\udd79",
+      "gold": "support",
+      "predicted": "anecdote"
+    },
+    {
+      "text": "Wet eyeballs",
+      "gold": "support",
+      "predicted": "anecdote"
+    },
+    {
+      "text": "Now when you look in the mirror you see who he\u2019s calling beautiful \ud83e\udd72 you\u2019re seeing you through his eyes. Love this",
+      "gold": "support",
+      "predicted": "anecdote"
+    },
+    {
+      "text": "This is what I love to see, this is the love I receive and I wish on everyone in my life. \ud83e\udd70",
+      "gold": "support",
+      "predicted": "pushback"
+    },
+    {
+      "text": "Same! It\u2019s like if someone writes well, it must be AI. Telling stories (non fiction or fiction) has been part of humanity long before technology even existed, and some people are just great writers!",
+      "gold": "pushback",
+      "predicted": "anecdote"
+    },
+    {
+      "text": "i feel u, as a fellow girl w rosacea. even going to the gym has got me self conscious \ud83d\ude14",
+      "gold": "anecdote",
+      "predicted": "pushback"
+    },
+    {
+      "text": "Eh, I'd be wary of the \"I haven't missed a day...\" thing. He is making sure you notice he's putting in the work - and he'll want it fixed eventually. And the problem will become that his efforts aren't being appreciated, because if you believed him, you would be fixed. Just watch it, is all. Maybe I'm wrong.",
+      "gold": "pushback",
+      "predicted": "pushback"
+    },
+    {
+      "text": "You\u2019re describing my husband.You won the lottery.",
+      "gold": "support",
+      "predicted": "anecdote"
+    },
+    {
+      "text": "I LOVE this \ud83d\udc9c\ud83d\udc9c\ud83d\udc9c live life you beautiful princess. You deserve all of this and more!",
+      "gold": "support",
+      "predicted": "pushback"
+    },
+    {
+      "text": "\ud83d\udc0c\ud83d\udc4f. \ud83e\udeab\ud83d\udc4f. \ud83e\udda5\ud83d\udc4f. Dang, Previous_BusGirl's first EDIT broke me! --like I've been nothing but irritated about my life the last 48 hours and haven't been able to cry about it, yet NOW? I just experienced a dam-breaking whoosh of happy tears to see that by day 2 she'd doubled the upvoter count and is probably about to have another beautiful morning with the boyfriend. And that's awesome and all... but I wanna have myyy emotion's cry about stuff too.",
+      "gold": "anecdote",
+      "predicted": "anecdote"
+    },
+    {
+      "text": "This. And his \u201cI can fix this, I\u2019ll just try HARDER\u201d is the purest icing on the cake.",
+      "gold": "support",
+      "predicted": "pushback"
+    },
+    {
+      "text": "He sounds like a keeper! I went on a makeup course as part of my cancer treatment and got a tube of Rosalique. I get hives and have rosacea and it is really good at blending them away. You might not even want to but I thought I\u2019d let you know - I only bother on special occasions!",
+      "gold": "anecdote",
+      "predicted": "anecdote"
+    },
+    {
+      "text": "My question is where did you find this mythical partner? So i can order one too. lol",
+      "gold": "support",
+      "predicted": "pushback"
+    }
+  ]
+}

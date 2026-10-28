@@ -5,6 +5,7 @@
 #
 # Delete the examples below and put yours in.
 
-analysis: makes an argument backed by a specific, checkable fact
-hot_take: a confident claim with no support offered
-reaction: an immediate response to something that just happened
+support: A comment whose main point is backing OP or someone else in the thread (praise, comfort, congratulations, or telling them they deserve better), with any mention of the commenter's own life kept to a passing clause.
+anedote: A comment whose main point is a story or experience from the commenter's own life (their partner, their skin, a past relationship), even if it opens or closes with a line of encouragement for OP.
+pushback: A comment that disagrees with OP or another commenter, or questions the post itself, whatever its tone.
+

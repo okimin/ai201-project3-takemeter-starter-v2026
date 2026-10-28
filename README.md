@@ -212,18 +212,22 @@ of next unit's variance. -->
 
 | Measure | Baseline | Trained | Difference |
 |---|---|---|---|
-| Overall accuracy |  |  |  |
-| Macro F1 |  |  |  |
-| F1 — `label_one` |  |  |  |
-| F1 — `label_two` |  |  |  |
+| Overall accuracy | 0.217 | 0.652 | +0.435 |
+| Macro F1 | 0.217 | 0.263 | +0.046 |
+| F1 — `anecdote` | 0.400 | 0.000 | -0.400 |
+| F1 — `pushback` | 0.250 | 0.000 | -0.250 |
+| F1 — `support` | 0.000 | 0.789 | +0.789 |
 
 **What I predicted before I looked:**
 <!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
      prediction made afterwards isn't one. -->
+     I predict that the trained will have more accuracy than the baseline.
 
 **What the gap actually means:**
 <!-- If the baseline matched your trained model, your fine-tuning added
      nothing — and that is a real finding, not a failure. Say it plainly. -->
+
+Interesting that the support has accuracy of 0.
 
 
 
@@ -233,6 +237,16 @@ of next unit's variance. -->
 
 <!-- Five criteria across three seeds. The notebook's section 6 prints the
      spread table; the Target and Verdict columns are yours. -->
+
+| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
+|---|---|---|---|---|
+| Overall accuracy | 0.652 | 0.652 | 0.739 | 0.087 |
+| Macro F1 | 0.263 | 0.263 | 0.468 | 0.205 |
+| F1 — `anecdote` | 0.000 | 0.000 | 0.571 | 0.571 |
+| F1 — `pushback` | 0.000 | 0.000 | 0.000 | 0.000 |
+| F1 — `support` | 0.789 | 0.789 | 0.833 | 0.044 |
+
+Accuracy moved 0.087 across seeds. Enough that a criterion landing within that band can't really be called either way.
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
@@ -247,11 +261,19 @@ of next unit's variance. -->
 <!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
      An image of a matrix earns nothing. -->
 
-| true \ predicted |  |  |  |
+| true \ predicted | anecdote | pushback | support |
 |---|---|---|---|
-| **** |  |  |  |
-| **** |  |  |  |
-| **** |  |  |  |
+| **anecdote** | 0 | 0 | 5 |
+| **pushback** | 0 | 0 | 3 |
+| **support** | 0 | 0 | 15 |
+
+Biggest confusion: 5 real `anecdote` posts called `support`.
+The other direction: 0 real `support` posts called `anecdote`.
+
+That's lopsided — the model leans toward `support` on this pair.
+A direction like that usually points at your labelling rather than the
+model. Your agreement report is the thing that can tell you which.
+
 
 **My biggest off-diagonal number, and what it means:**
 <!-- Not "the model made mistakes" — WHICH boundary it didn't learn, and which
